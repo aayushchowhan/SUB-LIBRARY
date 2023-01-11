@@ -1,0 +1,87 @@
+#: import utils kivy.utils
+<WisBtn>:
+    pos_hint:{"center_x":.5,"center_y":.5}
+    text:"ADD TO WISLIST"
+    md_bg_color: 90/255,189/255,140/255,1
+    on_release:
+        self.text = "ADD TO WISLIST" if self.text == "REMOVE FROM WISLIST" else "REMOVE FROM WISLIST"
+        self.md_bg_color = [90/255,189/255,140/255,1] if self.text != "REMOVE FROM WISLIST" else [221/255,221/255,221/255,1]
+<Listi>:
+    size_hint_y:None
+    height:"200sp"
+    border_radius:50
+    canvas :
+        Color: 
+            rgb : utils.get_color_from_hex("#ffffff")
+        RoundedRectangle:
+            radius:[50,50,50,50]
+            size:self.size
+            pos: self.pos 
+        Color: 
+            rgb : utils.get_color_from_hex("##202121")
+        Line:
+            rounded_rectangle:(self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+            width :  1
+    BoxLayout:
+        orientation:"horizontal"
+        Image:
+            size_hint: (.5,.9)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            source : "imgs/extras/cover.jpg"
+        BoxLayout:
+            orientation:"vertical"
+            spacing:"20sp"
+            Label:
+                size: self.texture_size
+                text_size: self.width, None
+                text: root.title +" "+ root.edition + " " + root.pub + " " + str(root.year)
+                bold:True
+                font_size:'20sp'
+                color:0,0,0,1
+            Label:
+                size_hint:None , None
+                
+                size: self.texture_size
+                text:"By "+root.author
+                color:0,0,0,.5
+            Label:
+                size_hint:None , None
+                size: self.texture_size
+                bold:True
+                text:"Hurry up only "+str(root.quantity)+" left"
+                color:254/255,124/255,124/124,1
+            BoxLayout:
+                pos_hint:{"center_x":.5,"center_y":.5}
+                WisBtn:
+<Mbg2>:
+    FloatLayout:
+        Image:
+            source:"imgs/BackGrounds/bg.png"
+            allow_stretch : True
+            keep_ratio : False
+    MDTextFieldRound:
+        line_color:235/255,109/255,156/255,0
+        normal_color: 239/255,239/255,239/255,.7
+        color_active: 239/255,239/255,239/255,.9
+        size_hint: .7,1
+        pos_hint:{"top":1,"center_x":.5}
+        size_hint_y:None
+        pos_hint:{"top":.95,"center_x":.5}
+        font_size:'25sp'
+        hint_text: "Search Books, Authors"
+        icon_left:"magnify"
+        on_text: app.set_list_books(self.text, True)
+
+<Search>:
+    Mbg2:
+    ScrollView:
+        size_hint:(1, None)
+        size:root.width, root.height*.90
+        pos_hint:{"top":.90}
+        GridLayout:
+            id : lis
+            cols:1
+            spacing:"10sp"
+            padding:"20sp"
+            size_hint_y:None
+            height:self.minimum_height

@@ -1,0 +1,361 @@
+<Page>:
+    orientation:'vertical'
+    size_hint:.9,.8
+    pos_hint : {"center_x": .5,"center_y":.5}
+    BoxLayout:
+        pos_hint : {"center_x": .5,"center_y":.5}
+        orientation:'vertical'
+        size_hint:.9,.4
+        Label:
+            text:"24x7 Hours\nApp Service"
+            font_size:"30sp"
+            color : 235/255,109/255,156/255,1
+        Label:
+            text:"Our app is always available for you"
+            color :  235/255,109/255,156/255,1
+    BoxLayout:
+        pos_hint : {"center_x": .5,"center_y":.5}
+        Image:
+            source: root.img
+<MeraButton>:
+        
+    line_color:235/255,109/255,156/255,0
+    normal_color: 239/255,239/255,239/255,.4
+    color_active: 239/255,239/255,239/255,.5
+    
+    font_size:'25sp'
+
+<ForPassScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            orientation:'vertical'
+            BoxLayout:
+                orientation:'vertical'
+                
+                pos_hint:{"top":.9,"left":.8}
+                Button:
+                    size_hint : .1,.5
+                    background_color :(235/255,109/255,156/255,0)
+                    background_normal: ''
+                    text:"<"
+                    font_size: "30sp"
+                    color:[0,0,0,.5]
+                    on_press:
+                        app.manager.transition.direction = 'right'
+                        app.manager.current = 'signin'
+                Label:
+                    text:"Forgot your password?"
+                    bold:True
+                    markup : True
+                    font_size:'30sp'
+                    color:[0,0,0,.7]
+            BoxLayout:
+                id : fpbox
+                orientation:'vertical'
+                pos_hint:{"top":1,"center_x":.5}
+                size_hint:.8,.4
+                spacing:"20sp"
+                ClickableTextFieldRound:
+                    id :phone_no
+                    hint_text: "phone no"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    passr: False
+                    BoxLayout:
+                        pos_hint:{"right":.95,"bottom":1}
+                        size_hint :None,None
+                        Button:
+                            size_hint :None,None
+                            background_color :(235/255,109/255,156/255,0)
+                            background_normal: ''
+
+                            text:"Send OTP"
+                            font_size: "12sp"
+                            color:[0,0,0,.5]
+                            on_press:
+                                app.otpgen(self.parent.parent.ids.text_field.text)
+                                root.start_timer()
+                ClickableTextFieldRound:
+                    id :otp_get
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    passr: False
+                    hint_text:"Enter OTP"
+                    BoxLayout:
+                        pos_hint:{"right":.95,"bottom":1}
+                        size_hint :None,None
+                        Label:
+                            id: otp_timing
+                            size_hint :None,None
+                            text: root.time
+                            font_size: "12sp"
+                            color:[1,0,0,.5]
+                
+            BoxLayout:
+                pos_hint:{"right":.8,"top":1}
+                size_hint :None,None
+                Button:
+                    size_hint :None,None
+                    background_color :(235/255,109/255,156/255,0)
+                    background_normal: ''
+                   
+                    text:"resend OTP"
+                    font_size: "12sp"
+                    color:[0,0,0,.5]
+                    on_press:
+                        print("on_prog")
+            
+                
+            SmoothButton:
+                pos_hint : {"center_x": .5,"center_y":.5}
+                size_hint : .9,.25
+                text:"Proceed"
+                bold:True
+                markup : True
+                font_size:'25sp'
+                color:[0,0,0,.5]
+                on_release:
+                    print(int(otp_get.ids.text_field.text)==app.my_otp)
+                    app.manager.transition.direction = 'left'
+                    app.manager.current = 'change_passo'
+
+        BoxLayout:
+            size_hint : 1,.65
+    
+<Signin_signup>:
+    Image:
+        source : "imgs/BackGrounds/bl.png"
+        allow_stretch:True
+        keep_ratio:False
+    BoxLayout:
+        size_hint:.5,.6
+        pos_hint:{"top":.9,"center_x":.5}
+        spacing:"20sp"
+        orientation:"vertical"
+        Label:
+            text:"Welcome to\nSUB Library"
+            font_size:"40sp"
+            color : 235/255,109/255,156/255,1
+        BoxLayout:
+            size_hint:1,.4
+            pos_hint:{"center_x":.5,"center_x":.6}
+            spacing:"20sp"
+            orientation:"vertical"
+            SmoothButton:
+                pos_hint : {"center_x": .5,"center_y":.5}
+                text:"SIGN UP"
+            SmoothButton:
+                pos_hint : {"center_x": .5,"center_y":.5}
+                text:"SIGN IN"
+                on_press:
+                    app.manager.transition.direction = 'left'
+                    app.manager.current = 'signin'
+<ClickableTextFieldRound>:
+
+    MDTextFieldRound:
+        line_color:235/255,109/255,156/255,0
+        normal_color: 239/255,239/255,239/255,.4
+        color_active: 239/255,239/255,239/255,.5
+        font_size:'25sp'
+        id: text_field
+        hint_text: root.hint_text
+        text: root.text
+        password: root.passr
+        
+        
+
+    
+<Indigator>:
+    pos_hint:{"center_y":.5,"center_x":.5}
+    BoxLayout:
+        orientation:"horizontal"
+        size_hint:None,None
+        pos_hint:{"center_y":.5,"center_x":.5}
+        FloatLayout:
+            size_hint:None,None
+            pos_hint:{"center_y":.5,"center_x":.5}
+            canvas:
+                Color:
+                    rgba:root.ci1
+                Ellipse:
+                    size: 20,20
+                    pos:self.pos[0]/2,self.pos[1]
+        FloatLayout:
+            pos_hint:{"center_y":.5,"center_x":.5}
+            size_hint:None,None
+            canvas:
+                Color:
+                    rgba:root.ci2
+                Ellipse:
+                    size: 20,20
+                    pos:self.pos[0]/2,self.pos[1]
+        FloatLayout:
+            pos_hint:{"center_y":.5,"center_x":.5}
+            size_hint:None,None
+            canvas:
+                Color:
+                    rgba:root.ci3
+                Ellipse:
+                    size: 20,20
+                    pos:self.pos[0]/2,self.pos[1]
+<SignScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            orientation:'vertical'
+            BoxLayout:
+                orientation:'vertical'
+                
+                pos_hint:{"top":.9,"left":.8}
+                Button:
+                    size_hint : .1,.5
+                    background_color :(235/255,109/255,156/255,0)
+                    background_normal: ''
+                    text:"<"
+                    font_size: "30sp"
+                    color:[0,0,0,.5]
+                    on_press:
+                        app.manager.transition.direction = 'right'
+                        app.manager.current = 'stater'
+                Label:
+                    text:"Sign In"
+                    bold:True
+                    markup : True
+                    font_size:'30sp'
+                    color:[0,0,0,.7]
+            BoxLayout:
+                
+                orientation:'vertical'
+                pos_hint:{"center_y":.5,"center_x":.5}
+                size_hint:.8,.4
+                spacing:"20sp"
+                MDTextFieldRound:
+                    id : e_enrollment
+                    line_color:235/255,109/255,156/255,0
+                    normal_color: 239/255,239/255,239/255,.4
+                    color_active: 239/255,239/255,239/255,.5
+                    font_size:'25sp'
+                    hint_text: "Enrollment number"
+                ClickableTextFieldRound:
+                    id : p_pass
+                    hint_text: "Password"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    passr: True
+                    MDIconButton:
+                        icon: "eye-off"
+                        ripple_scale: .5
+                        pos_hint: {"center_y": .4}
+                        pos: root.width*.8 - self.width + dp(8), 0
+                        on_release: 
+                            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                            self.parent.passr = False if self.parent.passr is True else True
+            BoxLayout:
+                orientation:'horizontal'
+                pos_hint: {"center_x": .5, "center_y": .5} 
+                size_hint : .9,.4
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint: .5, 1
+                    MDCheckbox:
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {'center_x': .5, 'center_y': .5}
+                    Label:
+                        text:"Stay logged in"
+                        size: self.texture_size
+                        color:[0,0,0,.5]
+                Button:
+                    background_color :(235/255,109/255,156/255,0)
+                    background_normal: ''
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    size_hint: 1, 1
+                    text:"forget your password ?"
+                    color:[0,0,0,.5]
+                    on_release:
+                        app.manager.transition.direction = 'left'
+                        app.manager.current = 'forpass'
+            SmoothButton:
+                pos_hint : {"center_x": .5,"center_y":.5}
+                size_hint : .9,.25
+                text:"Sign In"
+                bold:True
+                markup : True
+                font_size:'25sp'
+                color:[0,0,0,.5]
+                on_release:
+                    root.login_me(e_enrollment.text,p_pass.ids.text_field.text)
+
+        BoxLayout:
+            size_hint : 1,.65
+<ChangePassScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            orientation:'vertical'
+            BoxLayout:
+                orientation:'vertical'
+                
+                pos_hint:{"top":.9,"left":.8}
+                Button:
+                    size_hint : .1,.5
+                    background_color :(235/255,109/255,156/255,0)
+                    background_normal: ''
+                    text:"<"
+                    font_size: "30sp"
+                    color:[0,0,0,.5]
+                    on_press:
+                        app.manager.transition.direction = 'right'
+                        app.manager.current = 'forpass'
+                Label:
+                    text:"Forgot Your Password ?"
+                    bold:True
+                    markup : True
+                    font_size:'30sp'
+                    color:[0,0,0,.7]
+            BoxLayout:
+                
+                orientation:'vertical'
+                pos_hint:{"center_y":.5,"center_x":.5}
+                size_hint:.8,.4
+                spacing:"20sp"
+                ClickableTextFieldRound:
+                    hint_text: "New Password"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    passr: True
+                    MDIconButton:
+                        icon: "eye-off"
+                        ripple_scale: .5
+                        pos_hint: {"center_y": .4}
+                        pos: root.width*.8 - self.width + dp(8), 0
+                        on_release:
+                            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                            self.parent.passr = False if self.parent.passr is True else True
+                ClickableTextFieldRound:
+                    hint_text: "Re Enter Password"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    passr: True
+                    MDIconButton:
+                        icon: "eye-off"
+                        ripple_scale: .5
+                        pos_hint: {"center_y": .4}
+                        pos: root.width*.8 - self.width + dp(8), 0
+                        on_release:
+                            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                            self.parent.passr = False if self.parent.passr is True else True
+            BoxLayout:
+                orientation:'horizontal'
+                pos_hint: {"center_x": .5, "center_y": .5} 
+                size_hint : .9,.4
+                
+            SmoothButton:
+                pos_hint : {"center_x": .5,"center_y":.5}
+                size_hint : .9,.25
+                text:"proceed"
+                bold:True
+                markup : True
+                font_size:'25sp'
+                color:[0,0,0,.5]
+                on_press:
+                    app.manager.transition.direction = 'left'
+                    app.manager.current = 'signin'
+        BoxLayout:
+            size_hint : 1,.65

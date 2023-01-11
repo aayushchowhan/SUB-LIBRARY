@@ -1,0 +1,31 @@
+# import Home home.Home
+# import Search search.Search 
+# import Wishlist wishlist.Wishlist 
+# import Profile profile.Profile 
+<NavigationScreen>:
+    MDBottomNavigation:
+        panel_color: 235/255,109/255,156/255,.7
+        text_color_active: 1, 0, 1, 1
+        text_color_normal: 1,1,1,1
+        MDBottomNavigationItem:
+            name: "home"
+            icon :"home"
+            text : "home"
+            Home:
+        MDBottomNavigationItem:
+            name: "search"
+            icon : "magnify"
+            text:"search"
+            Search:
+                id : mehtha
+        MDBottomNavigationItem:
+            name: "wishlist"
+            text:"wishlist"
+            icon : "format-list-text"
+            Wishlist:
+        MDBottomNavigationItem:
+            name: "profile"
+            text:"profile"
+            icon:"account"
+            Profile:
+

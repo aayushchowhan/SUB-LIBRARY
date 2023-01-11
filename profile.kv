@@ -1,0 +1,93 @@
+<SmoothButton@Button>:
+    background_color :(235/255,109/255,156/255,0)
+    background_normal: ''
+    back_color:(235/255,109/255,156/255,1)
+    border_radius:50
+    color: (0,0,0,1)
+    canvas.before:
+        Color:
+            rgba:self.back_color
+        Line:
+            rounded_rectangle:(self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+            width :  3
+
+<Profile>:
+    BoxLayout
+        orientation: "vertical"
+
+        BoxLayout:
+            orientation: "vertical"
+            padding:"20sp"
+            BoxLayout:
+                orientation: "horizontal"
+                padding:"20sp"
+                Label:
+                    color: 0,0,0,1
+                    text:"<"
+                    size_hint_x: None
+                    font_size:'25sp'
+                    size: self.texture_size
+                    pos_hint: {'left': .7}
+                Label:
+                    bold:True
+                    color: 0,0,0,1
+                    text: "Edit Profile"
+                    font_size:'25sp'
+        
+            BoxLayout:
+                size_hint:1,1.7
+                canvas:
+                    Ellipse: 
+                        pos:(self.size[0]/2)-(self.size[1]/3.5),(self.pos[1])
+                        size:self.size[1],self.size[1]
+                        source:"imgs/extras/profile.png"
+            Label:
+                color: 0,0,0,0.7
+                text:"change pro pic"
+        MDBoxLayout:
+            pos_hint:{"top":1}
+            adaptive_height:True
+            orientation: "vertical"
+            padding:"10sp"
+            spacing:"10sp"
+            MDTextFieldRound:
+                line_color:235/255,109/255,156/255,0
+                normal_color: 239/255,239/255,239/255,.4
+                color_active: 239/255,239/255,239/255,.5
+                
+                font_size:'25sp'
+                hint_text: "Name"
+
+            MDTextFieldRound:
+                line_color:235/255,109/255,156/255,0
+                normal_color: 239/255,239/255,239/255,.4
+                color_active: 239/255,239/255,239/255,.5
+                
+                font_size:'25sp'
+                hint_text: "Change your email"    
+            
+            MDTextFieldRound:
+                line_color:235/255,109/255,156/255,0
+                normal_color: 239/255,239/255,239/255,.4
+                color_active: 239/255,239/255,239/255,.5
+                
+                font_size:'25sp'
+                hint_text: "Change mobile number"
+            
+            MDTextFieldRound:
+                line_color:235/255,109/255,156/255,0
+                normal_color: 239/255,239/255,239/255,.4
+                color_active: 239/255,239/255,239/255,.5
+                
+                font_size:'25sp'
+                hint_text: "Add bio"
+            
+
+        BoxLayout:
+            size_hint:0.3,0.2
+            pos_hint:{"center_x":0.5, "center_y":0.5}
+            SmoothButton:
+                color: 0,0,0,1
+                text:"Save"
+        BoxLayout:
+            size_hint:1,.5
